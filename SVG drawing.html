@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Draw</title>
+    <style>
+        body {
+            margin: 0;
+            background: #87CEEB;
+        }
+
+        canvas {
+            display: block;
+            margin: 20px auto;
+            border: 2px solid black;
+            background: rgba(255, 255, 255, 0.815);
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="canvas" width="1000" height="550"></canvas>
+
+<script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    let isDrawing = false;
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "black";
+
+    canvas.addEventListener("mousedown", (e) => {
+        isDrawing = true;
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
+    });
+
+    canvas.addEventListener("mousemove", (e) => {
+        if (!isDrawing) return;
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+    });
+
+    canvas.addEventListener("mouseup", () => {
+        isDrawing = false;
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+        isDrawing = false;
+    });
+</script>
+
+</body>
+</html>
